@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+D:\1000j\Documents\3-2\NetWorkProgramming\GaJangTalk\GaJangTalk\.metadata\.plugins\org.eclipse.jdt.core
+1410326785.index
+3755247776.index
+1123899651.index

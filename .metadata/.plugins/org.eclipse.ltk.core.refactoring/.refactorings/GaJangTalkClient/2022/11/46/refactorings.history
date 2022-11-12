@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;ChatRoom&apos; to &apos;StartScreen&apos;&#x0D;&#x0A;- Original project: &apos;GaJangTalkClient&apos;&#x0D;&#x0A;- Original element: &apos;ChatRoom&apos;&#x0D;&#x0A;- Renamed element: &apos;StartScreen&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ChatRoom&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{ChatRoom.java[ChatRoom" matchStrategy="1" name="StartScreen" qualified="false" references="true" similarDeclarations="false" stamp="1668244538047" textual="false" version="1.0"/>
+</session>
