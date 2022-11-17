@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -15,6 +18,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,6 +32,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.ScrollPaneConstants;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
@@ -42,8 +48,11 @@ public class ChatRoomView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPanel topbarPane;
+	private JPanel bottombarPane;
 	private JTextField txtInput;
 	private String UserName;
+	private String ParticipateNames;
 	private JButton btnSend;
 	private static final int BUF_LEN = 128; // Windows 처럼 BUF_LEN 을 정의
 	private Socket socket; // 연결소켓
@@ -56,12 +65,17 @@ public class ChatRoomView extends JFrame {
 	private ObjectOutputStream oos;
 
 	private JLabel lblUserName;
+	private JLabel lblParticipateNames;
 	// private JTextArea textArea;
 	private JTextPane textArea;
-
+	private int w;
+	private int h;
+	
 	private Frame frame;
 	private FileDialog fd;
-	private JButton imgBtn;
+	private JLabel imgBtn;
+	private JLabel menu;
+	private Image imgBtn2;
 
 	/**
 	 * Create the frame.
@@ -69,28 +83,56 @@ public class ChatRoomView extends JFrame {
 	public ChatRoomView(String username, String ip_addr, String port_no) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 394, 630);
+		
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.PINK);
+		contentPane.setBounds(100,150,394,300);
+		add(contentPane,"Center");
 		contentPane.setLayout(null);
+		//setVisible(true);
 
+		lblParticipateNames = new JLabel("Participants");
+		lblParticipateNames.setBorder(new LineBorder(new Color(255, 255, 255)));
+		lblParticipateNames.setBackground(Color.WHITE);
+		lblParticipateNames.setFont(new Font("굴림", Font.BOLD, 14));
+		//lblParticipateNames.setHorizontalAlignment(SwingConstants.CENTER);
+		lblParticipateNames.setBounds(12, 10, 300, 40);
+		contentPane.add(lblParticipateNames);
+		setVisible(true);
+		
+		
+		menu = new JLabel("≡");
+		menu.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				//menu 클릭 했을 때
+			}
+		});
+		menu.setFont(new Font("굴림", Font.BOLD, 35));
+		menu.setBounds(324, 10, 50, 40);
+		contentPane.add(menu);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 10, 352, 471);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(12, 50, 352, 430);
 		contentPane.add(scrollPane);
 
 		textArea = new JTextPane();
 		textArea.setEditable(true);
 		textArea.setFont(new Font("굴림체", Font.PLAIN, 14));
+		textArea.setBackground(new java.awt.Color(155, 187, 212));
 		scrollPane.setViewportView(textArea);
 
 		txtInput = new JTextField();
-		txtInput.setBounds(74, 489, 209, 40);
+		txtInput.setBounds(12, 483, 352, 46);
 		contentPane.add(txtInput);
-		txtInput.setColumns(10);
+		//txtInput.setColumns(10);
+		//scrollPane.setViewportView(txtInput);
 
-		btnSend = new JButton("Send");
+		btnSend = new JButton("전송");
 		btnSend.setFont(new Font("굴림", Font.PLAIN, 14));
-		btnSend.setBounds(295, 489, 69, 40);
+		btnSend.setBackground(Color.ORANGE);
+		btnSend.setBounds(295, 539, 69, 40);
 		contentPane.add(btnSend);
 
 		lblUserName = new JLabel("Name");
@@ -98,7 +140,7 @@ public class ChatRoomView extends JFrame {
 		lblUserName.setBackground(Color.WHITE);
 		lblUserName.setFont(new Font("굴림", Font.BOLD, 14));
 		lblUserName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUserName.setBounds(12, 539, 62, 40);
+		lblUserName.setBounds(72, 539, 62, 40);
 		contentPane.add(lblUserName);
 		setVisible(true);
 
@@ -106,10 +148,12 @@ public class ChatRoomView extends JFrame {
 		UserName = username;
 		lblUserName.setText(username);
 
-		imgBtn = new JButton("+");
-		imgBtn.setFont(new Font("굴림", Font.PLAIN, 16));
-		imgBtn.setBounds(12, 489, 50, 40);
+		//JLabel lblImage = new JLabel(new ImageIcon("clip.png"));
+		
+		imgBtn = new JLabel(new ImageIcon("clip.png"));
+		imgBtn.setBounds(12, 539, 50, 40);
 		contentPane.add(imgBtn);
+
 		
 		JButton btnNewButton = new JButton("종 료");
 		btnNewButton.setFont(new Font("굴림", Font.PLAIN, 14));
@@ -120,7 +164,7 @@ public class ChatRoomView extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnNewButton.setBounds(295, 539, 69, 40);
+		btnNewButton.setBounds(215, 539, 69, 40);
 		contentPane.add(btnNewButton);
 
 		try {
@@ -144,8 +188,14 @@ public class ChatRoomView extends JFrame {
 			btnSend.addActionListener(action);
 			txtInput.addActionListener(action);
 			txtInput.requestFocus();
-			ImageSendAction action2 = new ImageSendAction(); //+버튼에 대한 action추가
-			imgBtn.addActionListener(action2);
+			//ImageSendAction action2 = new ImageSendAction(); //+버튼에 대한 action추가
+			//imgBtn.addMouseListener(action2);
+			imgBtn.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					sendImage();
+				}
+			});
 
 		} catch (NumberFormatException | IOException e) {
 			// TODO Auto-generated catch block
@@ -160,24 +210,6 @@ public class ChatRoomView extends JFrame {
 		public void run() {
 			while (true) {
 				try {
-					// String msg = dis.readUTF();
-//					byte[] b = new byte[BUF_LEN];
-//					int ret;
-//					ret = dis.read(b);
-//					if (ret < 0) {
-//						AppendText("dis.read() < 0 error");
-//						try {
-//							dos.close();
-//							dis.close();
-//							socket.close();
-//							break;
-//						} catch (Exception ee) {
-//							break;
-//						}// catch문 끝
-//					}
-//					String	msg = new String(b, "euc-kr");
-//					msg = msg.trim(); // 앞뒤 blank NULL, \n 모두 제거
-
 					Object obcm = null;
 					String msg = null;
 					ChatMsg cm;
@@ -196,6 +228,9 @@ public class ChatRoomView extends JFrame {
 					} else
 						continue;
 					switch (cm.getCode()) {
+					case "100": //participate message
+						AppendParticipate(cm.getData());
+						break;
 					case "200": // chat message
 						AppendText(msg);
 						break;
@@ -259,20 +294,63 @@ public class ChatRoomView extends JFrame {
 			}
 		}
 	}
+	
+	private void sendImage() {
+		frame = new Frame("이미지첨부");
+		fd = new FileDialog(frame, "이미지 선택", FileDialog.LOAD);
+		// frame.setVisible(true);
+		// fd.setDirectory(".\\");
+		fd.setVisible(true);
+		//System.out.println(fd.getDirectory() + fd.getFile());
+		ChatMsg obcm = new ChatMsg(UserName, "300", "IMG");
+		ImageIcon img = new ImageIcon(fd.getDirectory() + fd.getFile());
+		obcm.setImg(img);
+		SendObject(obcm);
+	}
 
 	ImageIcon icon1 = new ImageIcon("src/icon1.jpg");
 
 	public void AppendIcon(ImageIcon icon) {
-		int len = textArea.getDocument().getLength();
-		// 끝으로 이동
-		textArea.setCaretPosition(len);
-		textArea.insertIcon(icon);
+		//프로필 사진 동그랗게
+		Image img = icon.getImage();
+			
+        
+		
+		int width,height;
+		double ratio;
+		width = icon.getIconWidth();
+		height = icon.getIconHeight();
+		if (width > 200 || height > 200) { 
+			if (width > height) { // 가로 사진
+				ratio = (double) height / width;
+				width = 200;
+				height = (int) (width * ratio);
+			} else { // 세로 사진
+				ratio = (double) width / height;
+				height = 200;
+				width = (int) (height * ratio);
+			}
+			//image 크기 조절 
+			Image new_img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+			ImageIcon new_icon = new ImageIcon(new_img);
+			int len = textArea.getDocument().getLength();
+			// 끝으로 이동
+			textArea.setCaretPosition(len);
+			textArea.insertIcon(new_icon);
+		}
+		
+	}
+	
+	//참여자 출력
+	public void AppendParticipate(String msg) {
+		msg = msg.trim();
+		lblParticipateNames.setText(msg);
 	}
 
 	// 화면에 출력
 	public void AppendText(String msg) {
 		// textArea.append(msg + "\n");
-		//AppendIcon(icon1); //프로필사진 추가 
+		AppendIcon(icon1); //프로필사진 추가 
 		msg = msg.trim(); // 앞뒤 blank와 \n을 제거한다.
 		int len = textArea.getDocument().getLength();
 		// 끝으로 이동

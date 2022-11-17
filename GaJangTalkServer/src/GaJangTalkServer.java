@@ -205,6 +205,29 @@ public class GaJangTalkServer extends JFrame {
 			AppendText("사용자 " + "[" + UserName + "] 퇴장. 현재 참가자 수 " + UserVec.size());
 		}
 
+		//방에게 새로운 참여자가 있다고 방송.
+				//writeOne이랑 비슷 server,100, msg 
+				public void AlertRoom(String msg) {
+					try {
+						ChatMsg obcm = new ChatMsg("SERVER", "100", msg);
+						oos.writeObject(obcm);
+					} catch (IOException e) {
+						AppendText("dos.writeObject() error");
+						try {
+							ois.close();
+							oos.close();
+							client_socket.close();
+							client_socket = null;
+							ois = null;
+							oos = null;
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						Logout(); // 에러가난 현재 객체를 벡터에서 지운다
+					}
+				}
+		
 		// 모든 User들에게 방송. 각각의 UserService Thread의 WriteONe() 을 호출한다.
 		public void WriteAll(String str) {
 			for (int i = 0; i < user_vc.size(); i++) {
