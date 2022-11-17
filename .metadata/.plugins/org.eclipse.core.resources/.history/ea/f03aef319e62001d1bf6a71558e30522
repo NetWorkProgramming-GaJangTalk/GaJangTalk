@@ -1,0 +1,7 @@
+import javax.swing.JFrame;
+
+public class test2 extends JFrame {
+	public test2(String username, String ip_addr, String port_no) {
+
+	}
+}
