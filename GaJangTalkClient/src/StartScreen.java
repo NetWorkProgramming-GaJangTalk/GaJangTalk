@@ -138,7 +138,7 @@ public class StartScreen extends JFrame {
 			String ip_addr = txtIpAddress.getText().trim();
 			String port_no = txtPortNumber.getText().trim();
 			//base view = new base(username, ip_addr, port_no);
-			ChatRoomView view = new ChatRoomView(username, ip_addr, port_no);
+			MainScreen view = new MainScreen(username, ip_addr, port_no);
 			// new base();
 			setVisible(false);
 		}
