@@ -122,6 +122,7 @@ public class GaJangTalkServer extends JFrame {
 					UserVec.add(new_user); // 새로운 참가자 배열에 추가
 					new_user.start(); // 만든 객체의 스레드 실행
 					AppendText("현재 참가자 수 " + UserVec.size());
+					
 				} catch (IOException e) {
 					AppendText("accept() error");
 					// System.exit(0);
@@ -169,7 +170,7 @@ public class GaJangTalkServer extends JFrame {
 //				is = client_socket.getInputStream();
 //				dis = new DataInputStream(is);
 //				os = client_socket.getOutputStream();
-//				dos = new DataOutputStream(os);
+				dos = new DataOutputStream(os);
 
 				oos = new ObjectOutputStream(client_socket.getOutputStream());
 				oos.flush();
@@ -276,16 +277,16 @@ public class GaJangTalkServer extends JFrame {
 		public void WriteOne(String msg) {
 			try {
 				// dos.writeUTF(msg);
-//				byte[] bb;
-//				bb = MakePacket(msg);
-//				dos.write(bb, 0, bb.length);
+				byte[] bb;
+				bb = MakePacket(msg);
+				//dos.write(bb, 0, bb.length);  //이거 가리니깐 this.out 어쩌구 오류 안뜨는데 이유를 모르겠음
 				ChatMsg obcm = new ChatMsg("SERVER", "200", msg);
 				oos.writeObject(obcm);
 			} catch (IOException e) {
 				AppendText("dos.writeObject() error");
 				try {
-//					dos.close();
-//					dis.close();
+					dos.close();
+					dis.close();
 					ois.close();
 					oos.close();
 					client_socket.close();
@@ -437,7 +438,7 @@ public class GaJangTalkServer extends JFrame {
 				} catch (IOException e) {
 					AppendText("ois.readObject() error");
 					try {
-//						dos.close();
+						dos.close();
 //						dis.close();
 						ois.close();
 						oos.close();

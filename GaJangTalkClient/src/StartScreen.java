@@ -1,5 +1,5 @@
-// JavaObjClient.java
-// ObjecStream 사용하는 채팅 Client
+// JavaChatClientMain.java
+// Java Client 시작import java.awt.BorderLayout;
 
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -17,18 +17,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class StartScreen extends JFrame {
-	
 
-	
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUserName;
 	private JTextField txtIpAddress;
 	private JTextField txtPortNumber;
+	private ImageIcon imgIcon, newImgIcon;
+	private Image img, updatedImg;
 
 	/**
 	 * Launch the application.
@@ -95,9 +90,20 @@ public class StartScreen extends JFrame {
 		
 		
 		
-		JButton btnConnect = new JButton("Login");
+		JButton btnConnect = new JButton("");
 		//btnConnect = new JButton(new ImageIcon("kakao_login_small.png"));
-		btnConnect.setBounds(70, 470, 300, 50);
+		btnConnect.setBounds(90, 472, 260, 40);
+		//btnConnect.setFont(new Font("굴림", Font.PLAIN, 14));
+		imgIcon = new ImageIcon("src/login_brown.jpg");
+		img = imgIcon.getImage();
+		img = img.getScaledInstance(260, 40, Image.SCALE_SMOOTH);
+		imgIcon = new ImageIcon(img);
+		btnConnect.setIcon(imgIcon);
+		btnConnect.setHorizontalAlignment(JLabel.CENTER);
+		btnConnect.setBorderPainted(false);
+		btnConnect.setContentAreaFilled(false);
+		btnConnect.setFocusPainted(false);
+		
 		contentPane.add(btnConnect);
 		
 		
@@ -126,10 +132,8 @@ public class StartScreen extends JFrame {
         //setResizable(false);//창의 크기를 변경하지 못하게
         page1.setLayout(null); //레이아웃 설정하기 위해.
         page1.setBounds(0, 0, 1400, 1600);//패널의 위치와 크기.
-        add(page1);
+        getContentPane().add(page1);
 	}
-	
-	
 	class Myaction implements ActionListener // 내부클래스로 액션 이벤트 처리 클래스
 	{
 		@Override
@@ -137,13 +141,8 @@ public class StartScreen extends JFrame {
 			String username = txtUserName.getText().trim();
 			String ip_addr = txtIpAddress.getText().trim();
 			String port_no = txtPortNumber.getText().trim();
-			//base view = new base(username, ip_addr, port_no);
-			MainScreen view = new MainScreen(username, ip_addr, port_no);
-			// new base();
+			ChatRoomView view = new ChatRoomView(username, ip_addr, port_no);
 			setVisible(false);
 		}
 	}
 }
-
-
-
