@@ -1,5 +1,5 @@
 // JavaChatClientView.java
-// ½ÇÁúÀûÀÎ Ã¤ÆÃ Ã¢
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ Ã¢
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -37,8 +37,8 @@ public class MainScreen extends JFrame {
 	private JTextField txtInput;
 	private String UserName;
 	private JButton btnSend;
-	private static final  int BUF_LEN = 128; //  Windows Ã³·³ BUF_LEN À» Á¤ÀÇ
-	private Socket socket; // ¿¬°á¼ÒÄÏ
+	private static final  int BUF_LEN = 128; //  Windows Ã³ï¿½ï¿½ BUF_LEN ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private Socket socket; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private InputStream is;
 	private OutputStream os;
 	private DataInputStream dis;
@@ -67,14 +67,14 @@ public class MainScreen extends JFrame {
 		contentPane.setLayout(null);
 	
 		
-		// ¸Ş´º¹Ù
+		// ë©”ë‰´ë°”
 		JPanel panelLeftMenu = new JPanel();
 		panelLeftMenu.setLayout(null);
 		panelLeftMenu.setBounds(0,0,50,600);
 		panelLeftMenu.setBackground(new Color(240, 240, 240));
 		contentPane.add(panelLeftMenu);
 		
-		//Ä£±¸ÅÇ ÀÌµ¿ ¹öÆ°
+		//ì¹œêµ¬íƒ­ ì´ë™ ë²„íŠ¼
 		JButton btnFriendList = new JButton();
 		btnFriendList.setText("");
 		imgIcon = new ImageIcon("src/profile.png");
@@ -91,7 +91,7 @@ public class MainScreen extends JFrame {
 		btnFriendList.setEnabled(false);
 
 		
-		//Ã¤ÆÃÅÇ ÀÌµ¿ ¹öÆ°
+		//ì±„íŒ…íƒ­ ì´ë™ ë²„íŠ¼
 		JButton btnChatList = new JButton();
 		btnChatList.setText("");
 		imgIcon = new ImageIcon("src/chat.png");
@@ -108,7 +108,7 @@ public class MainScreen extends JFrame {
 		
 		
 		
-		//Ä£±¸ÅÇ
+		//ì¹œêµ¬íƒ­
 		JPanel panelFriend = new JPanel();
 		panelFriend.setLayout(null);
 		panelFriend.setBounds(50,0,300,600);
@@ -116,7 +116,7 @@ public class MainScreen extends JFrame {
 		contentPane.add(panelFriend);
 		
 		
-		//Ä£±¸ÅÇ¾ÈÀÇ Çì´õ
+		//ì¹œêµ¬íƒ­ì•ˆì˜ í—¤ë”
 		JPanel panelFriendHeader = new JPanel();
 		panelFriendHeader.setBackground(new Color(255, 255, 255));
 		panelFriendHeader.setBounds(0,0,300,65);
@@ -131,13 +131,13 @@ public class MainScreen extends JFrame {
 		 */
 		
 		
-		//Ä£±¸ÅÇÀÇ Çì´õÀÇ Á¦¸ñ±Û
+		//ì¹œêµ¬íƒ­ì˜ í—¤ë”ì˜ ì œëª©ê¸€
 		JLabel lblFriend = new JLabel("\uCE5C\uAD6C");
 		lblFriend.setSize(300, 65);
 		lblFriend.setLocation(5, 0);
 		panelFriendHeader.add(lblFriend);
 		lblFriend.setBackground(new Color(255, 255, 255));
-		lblFriend.setFont(new Font("±¼¸²", Font.BOLD, 28));
+		lblFriend.setFont(new Font("êµ´ë¦¼", Font.BOLD, 28));
 		
 		
 		
@@ -145,7 +145,7 @@ public class MainScreen extends JFrame {
 		
 		
 		
-		//Ä£±¸ÅÇ ½ºÅ©·Ñ
+		//ì¹œêµ¬íƒ­ ìŠ¤í¬ë¡¤
 	
 		JScrollPane scrollPaneFriendList = new JScrollPane();
 		scrollPaneFriendList.setBorder(null);
@@ -161,11 +161,11 @@ public class MainScreen extends JFrame {
 			scrollPaneFriendList.add(view);
 		}
 		
-		//Ä£±¸ÅÇ ½ºÅ©·ÑÀÇ ÅØ½ºÆ®
+		//ì¹œêµ¬íƒ­ ìŠ¤í¬ë¡¤ì˜ í…ìŠ¤íŠ¸
 		JTextPane textPaneFriendList = new JTextPane();
 		scrollPaneFriendList.add(textPaneFriendList);
 		
-		//Ã¤ÆÃÅÇ
+		//ì±„íŒ…íƒ­
 		JPanel panelChat = new JPanel();
 		panelChat.setBackground(new Color(255, 255, 255));
 		panelChat.setBounds(50,0,300,600);
@@ -173,27 +173,27 @@ public class MainScreen extends JFrame {
 		panelChat.setBorder(null);
 		contentPane.add(panelChat);
 		
-		//Ã¤ÆÃÅÇ ¾ÈÀÇ Çì´õ
+		//ì±„íŒ…íƒ­ ì•ˆì˜ í—¤ë”
 		JPanel panelChatHeader = new JPanel();
 		panelChatHeader.setSize(300, 65);
 		panelChatHeader.setBackground(new Color(255, 255, 255));
 		panelChat.add(panelChatHeader);
 		panelChatHeader.setLayout(null);
 		
-		//Ã¤ÆÃÅÇÀÇ Çì´õÀÇ Á¦¸ñ±Û
+		//ì±„íŒ…íƒ­ì˜ í—¤ë”ì˜ ì œëª©ê¸€
 		JLabel lblChat = new JLabel("\uCC44\uD305");
 		lblChat.setLocation(5, 0);
 		lblChat.setSize(300, 65);
 		panelChatHeader.add(lblChat);
-		lblChat.setFont(new Font("±¼¸²", Font.BOLD, 28));
+		lblChat.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 28));
 		lblChat.setBackground(Color.WHITE);
 		
 		
-		//Ã¤ÆÃÅÇÀÇ Çì´õÀÇ ¹öÆ°
+		//ì±„íŒ…íƒ­ì˜ í—¤ë”ì˜ ë²„íŠ¼
 		JButton btnMakeRoom = new JButton("");
 		btnMakeRoom.setBounds(240, 20, 20, 20);
 		panelChatHeader.add(btnMakeRoom);
-		btnMakeRoom.setFont(new Font("±¼¸²", Font.PLAIN, 14));
+		btnMakeRoom.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 14));
 		imgIcon = new ImageIcon("src/plus_black.png");
 		img = imgIcon.getImage();
 		img = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -208,7 +208,7 @@ public class MainScreen extends JFrame {
 				
 		
 		
-		//Ã¤ÆÃÅÇ ½ºÅ©·Ñ
+		//ì±„íŒ…íƒ­ ìŠ¤í¬ë¡¤
 		JScrollPane scrollPaneChatList = new JScrollPane();
 		scrollPaneChatList.setBorder(null);
 		scrollPaneChatList.setLayout(null);
@@ -217,7 +217,7 @@ public class MainScreen extends JFrame {
 		scrollPaneChatList.setBackground(new Color(255, 255, 255));
 		panelChat.add(scrollPaneChatList);
 		
-		//Ã¤ÆÃÅÇÀÇ ½ºÅ©·ÑÀÇ ÅØ½ºÆ®
+		//ì±„íŒ…íƒ­ì˜ ìŠ¤í¬ë¡¤ì˜ í…ìŠ¤íŠ¸
 		JTextPane textPaneChatList = new JTextPane();
 		scrollPaneChatList.add(textPaneChatList);
 
@@ -232,7 +232,7 @@ public class MainScreen extends JFrame {
     });
 		
 		
-		//¹öÆ°Å¬¸¯(FriendList)
+		//ë²„íŠ¼í´ë¦­(FriendList)
 		btnFriendList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnFriendList.setEnabled(false);
@@ -241,7 +241,7 @@ public class MainScreen extends JFrame {
 				panelChat.setVisible(false);
 			}
 		});
-		//¹öÆ°Å¬¸¯(ChatList)
+		//ë²„íŠ¼í´ë¦­(ChatList)
 		btnChatList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnFriendList.setEnabled(true);
@@ -251,7 +251,7 @@ public class MainScreen extends JFrame {
 			}
 		});
 		
-		//¹öÆ°Å¬¸¯(MakeRoom)
+		//ë²„íŠ¼í´ë¦­(MakeRoom)
 				btnMakeRoom.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						MakeRoom view = new MakeRoom(username, ip_addr, port_no);
@@ -286,7 +286,7 @@ public class MainScreen extends JFrame {
 			ListenNetwork net = new ListenNetwork();
 			net.start();
 			Myaction action = new Myaction();
-			//btnSend.addActionListener(action); // ³»ºÎÅ¬·¡½º·Î ¾×¼Ç ¸®½º³Ê¸¦ »ó¼Ó¹ŞÀº Å¬·¡½º·Î
+			//btnSend.addActionListener(action); // ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¸ï¿½ ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			//txtInput.addActionListener(action);
 			//txtInput.requestFocus();
 		} catch (NumberFormatException | IOException e) {
@@ -296,7 +296,7 @@ public class MainScreen extends JFrame {
 		}
 
 	}
-	// Server Message¸¦ ¼ö½ÅÇØ¼­ È­¸é¿¡ Ç¥½Ã
+	// Server  Messageë¥¼ ìˆ˜ì‹ í•´ì„œ í™”ë©´ì— í‘œì‹œ
 	class ListenNetwork extends Thread {
 		public void run() {
 			while (true) {
@@ -314,11 +314,11 @@ public class MainScreen extends JFrame {
 							break;
 						} catch (Exception ee) {
 							break;
-						}// catch¹® ³¡
+						}// catchï¿½ï¿½ ï¿½ï¿½
 					}
 					String	msg = new String(b, "euc-kr");
-					msg = msg.trim(); // ¾ÕµÚ blank NULL, \n ¸ğµÎ Á¦°Å
-//					AppendText(msg); // server È­¸é¿¡ Ãâ·Â
+					msg = msg.trim(); // ï¿½Õµï¿½ blank NULL, \n ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//					AppendText(msg); // server È­ï¿½é¿¡ ï¿½ï¿½ï¿½
 				} catch (IOException e) {
 					AppendText("dis.read() error");
 					try {
@@ -328,25 +328,25 @@ public class MainScreen extends JFrame {
 						break;
 					} catch (Exception ee) {
 						break;
-					} // catch¹® ³¡
-				} // ¹Ù±ù catch¹®³¡
+					} // catchï¿½ï¿½ ï¿½ï¿½
+				} // ï¿½Ù±ï¿½ catchï¿½ï¿½ï¿½ï¿½
 				
 			}
 		}
 	}
-	// keyboard enter key Ä¡¸é ¼­¹ö·Î Àü¼Û
-	class Myaction implements ActionListener // ³»ºÎÅ¬·¡½º·Î ¾×¼Ç ÀÌº¥Æ® Ã³¸® Å¬·¡½º
+	// keyboard enter key ì¹˜ë©´ ì„œë²„ë¡œ ì „ì†¡
+	class Myaction implements ActionListener // ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½Ìºï¿½Æ® Ã³ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
 	{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// Send buttonÀ» ´©¸£°Å³ª ¸Ş½ÃÁö ÀÔ·ÂÇÏ°í Enter key Ä¡¸é
+			// Send buttonì„ ëˆ„ë¥´ê±°ë‚˜ ë©”ì‹œì§€ ì…ë ¥í•˜ê³  Enter key ì¹˜ë©´
 			if (e.getSource() == btnSend || e.getSource() == txtInput) {
 				String msg = null;
 				msg = String.format("[%s] %s\n", UserName, txtInput.getText());
 				SendMessage(msg);
-				txtInput.setText(""); // ¸Ş¼¼Áö¸¦ º¸³»°í ³ª¸é ¸Ş¼¼Áö ¾²´ÂÃ¢À» ºñ¿î´Ù.
-				txtInput.requestFocus(); // ¸Ş¼¼Áö¸¦ º¸³»°í Ä¿¼­¸¦ ´Ù½Ã ÅØ½ºÆ® ÇÊµå·Î À§Ä¡½ÃÅ²´Ù
-				if (msg.contains("/exit")) // Á¾·á Ã³¸®
+				txtInput.setText(""); // ï¿½Ş¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+				txtInput.requestFocus(); // ï¿½Ş¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Êµï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½Å²ï¿½ï¿½
+				if (msg.contains("/exit")) // ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 					/*
 					 * ChatMsg exitmsg = new ChatMsg(UserName, "400", "Bye"); SendObject(msg);
 					 */
@@ -360,7 +360,7 @@ public class MainScreen extends JFrame {
 //		textArea.setCaretPosition(len); // place caret at the end (with no selection)
 //		textArea.insertIcon(icon);	
 	}
-	// È­¸é¿¡ Ãâ·Â
+	// í™”ë©´ì— ì¶œë ¥
 	public void AppendText(String msg) {
 		//textArea.append(msg + "\n");
 //		AppendIcon(icon1);
@@ -369,7 +369,7 @@ public class MainScreen extends JFrame {
 // 		textArea.replaceSelection(msg + "\n"); // there is no selection, so inserts at caret
  	}
 
-	// Windows Ã³·³ message Á¦¿ÜÇÑ ³ª¸ÓÁö ºÎºĞÀº NULL ·Î ¸¸µé±â À§ÇÑ ÇÔ¼ö
+	// Windows ì²˜ëŸ¼ message ì œì™¸í•œ ë‚˜ë¨¸ì§€ ë¶€ë¶„ì€ NULL ë¡œ ë§Œë“¤ê¸° ìœ„í•œ í•¨ìˆ˜
 	public byte[] MakePacket(String msg) {
 		byte[] packet = new byte[BUF_LEN];
 		byte[] bb = null;
@@ -388,7 +388,7 @@ public class MainScreen extends JFrame {
 		return packet;
 	}
 
-	// Server¿¡°Ô networkÀ¸·Î Àü¼Û
+	// Serverì—ê²Œ networkìœ¼ë¡œ ì „ì†¡
 	public void SendMessage(String msg) {
 		try {
 			// dos.writeUTF(msg);
@@ -408,11 +408,11 @@ public class MainScreen extends JFrame {
 			}
 		}
 	}
-	public void SendObject(Object ob) { // ¼­¹ö·Î ¸Ş¼¼Áö¸¦ º¸³»´Â ¸Ş¼Òµå
+	public void SendObject(Object ob) { // ì„œë²„ë¡œ ë©”ì„¸ì§€ë¥¼ ë³´ë‚´ëŠ” ë©”ì†Œë“œ
 		try {
 			oos.writeObject(ob);
 		} catch (IOException e) {
-			// textArea.append("¸Ş¼¼Áö ¼Û½Å ¿¡·¯!!\n");
+			// textArea.append("ë©”ì„¸ì§€ ì†¡ì‹  ì—ëŸ¬!!!\n");
 			AppendText("SendObject Error");
 		}
 	}

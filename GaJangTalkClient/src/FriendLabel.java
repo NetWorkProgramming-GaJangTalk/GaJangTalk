@@ -1,36 +1,39 @@
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
+import javax.swing.JPanel;
 
 public class FriendLabel extends JPanel {
-		public FriendLabel() {
-		setBackground(new Color(128, 128, 192));
-		setBounds(0, 0, 170, 60);
-		
-		JButton btnIcon = new JButton("New button");
-		btnIcon.setText("");
-		btnIcon.setLayout(null);
-		btnIcon.setBounds(0, 0, 170, 60);
-		add(btnIcon);
-		
-		JLabel lblUserName = new JLabel("New label");
-		lblUserName.setBackground(new Color(255, 255, 255));
-		lblUserName.setFont(new Font("±¼¸²Ã¼", Font.PLAIN, 12));
-		lblUserName.setText("<dynamite>");
-		lblUserName.setLayout(null);
-		lblUserName.setBounds(0, 0, 170, 60);
-		add(lblUserName);
-		
-		JLabel lblTime = new JLabel("New label");
-		lblTime.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 9));
-		lblTime.setBackground(new Color(255, 255, 255));
-		lblTime.setText(null);
-		lblTime.setLayout(null);
-		lblTime.setBounds(48, 25, 69, 17);
-		add(lblTime);
-	}
+	private JPanel friendPane;
+	private JLabel lblUserName;
+	private JLabel lblTime;
+	private JButton btnIcon;
 	
+	public FriendLabel(String UserIcon, String UserName) {
+		setLayout(null);
+		
+		friendPane = new JPanel();
+		friendPane.setBackground(new java.awt.Color(155, 187, 212));
+		friendPane.setBounds(10,10,100,50);
+		add(friendPane);
+		friendPane.setLayout(null);
+		
+		btnIcon = new JButton(UserIcon);
+		btnIcon.setBounds(11,11,30,30);
+		friendPane.add(btnIcon);
+		
+		lblUserName = new JLabel(UserName);
+		lblUserName.setFont(new Font("êµ´ë¦¼", Font.BOLD, 10));
+		lblUserName.setBounds(51,11,50,20);
+		friendPane.add(lblUserName);
+		
+		
+		lblTime = new JLabel("null");
+		lblTime.setBackground(Color.white);
+		lblTime.setFont(new Font("êµ´ë¦¼", Font.BOLD, 8));
+		lblTime.setBounds(51,25,50,15);
+		friendPane.add(lblTime);
+	}
 }
