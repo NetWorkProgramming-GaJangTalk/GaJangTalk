@@ -1,7 +1,6 @@
-INDEX VERSION 1.131+D:\hyeok\Github\gajang\GaJangTalk\.metadata\.plugins\org.eclipse.jdt.core
-1123899651.index
-3755247776.index
-1865797976.index
-1671926070.index
-2472264906.index
+INDEX VERSION 1.131+D:\1000j\Documents\3-2\NetWorkProgramming\GaJangTalk\GaJangTalk\.metadata\.plugins\org.eclipse.jdt.core
 3363551043.index
+1671926070.index
+1410326785.index
+3755247776.index
+1123899651.index
